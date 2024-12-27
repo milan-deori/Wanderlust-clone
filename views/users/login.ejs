@@ -1,0 +1,94 @@
+<%layout("/layouts/boilerplate")%>
+
+<style>
+  body {
+    background-color: #f7f7f7; /* Light background color */
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .login-container {
+    background-color: #fff; /* White background for the form */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1); /* Slight shadow for a floating effect */
+    max-width: 450px;
+    margin: auto;
+    margin-top: 100px;
+  }
+
+  .login-container h1 {
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 30px;
+    font-size: 28px;
+  }
+
+  .form-label {
+    color: #555;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .btn-login {
+    background-color: #ff5a5f; /* Airbnb-like red color */
+    color: white;
+    border-radius: 25px;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-login:hover {
+    background-color: #ff787d;
+  }
+
+  .forgot-password {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .forgot-password a {
+    color: #ff5a5f;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="row mb-4">
+  <div class="login-container mb-5 mt-5">
+    <h1>Welcome Back to Wanderlust</h1>
+    <form action="/login" method="post" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" id="username" class="form-control" required/>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" id="password" class="form-control" required/>
+      </div>
+
+      <button type="submit" class="btn btn-login">Login</button>
+
+      <div class="forgot-password">
+        <p><a href="#">Forgot your password?</a></p>
+      </div>
+    </form>
+  </div>
+</div>

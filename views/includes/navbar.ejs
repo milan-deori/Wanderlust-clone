@@ -1,0 +1,188 @@
+<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom sticky-top shadow-sm">
+  <div class="container-fluid">
+    <!-- Brand Logo -->
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-regular fa-compass"  color: #ff5a5f;></i>
+    </a>
+
+    <!-- Toggler button for mobile -->
+    <button
+      class="navbar-toggler" 
+      type="button"
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNavAltMarkup" 
+      aria-controls="navbarNavAltMarkup" 
+      aria-expanded="false" 
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+       <!-- Explore and Airbnb your home (row 2) -->
+       <div class="navbar-nav d-flex left-nav justify-content-center w-100 mt-3">
+        <a class="nav-link text-dark px-3" href="/listings">Explore</a>
+        <a class="nav-link nav-link-btn btn btn-outline-dark fw-bold px-3 main" href="/listings/new" style="border-radius: 50px;">Airbnb your home</a>
+      </div>
+      <!-- Search Bar -->
+      <div class="navbar-nav w-100 my-2 my-md-0">
+        <form class="d-flex mx-auto" role="search">
+          <input
+            class="form-control search-bar me-2"
+            type="search"
+            placeholder="Search Destination"
+            aria-label="Search"
+          />
+          <button class="btn btn-search" type="submit">Search</button>
+        </form>
+      </div>
+
+     
+
+      <!-- Signup, Login/Logout (row 3) -->
+      <div class="navbar-nav d-flex right-nav justify-content-center w-100 mt-3">
+        <% if(!currUser){ %>
+          <a class="nav-link text-dark" href="/signup"><b>Signup</b></a>
+          <a class="nav-link text-dark" href="/login"><b>Login</b></a>
+        <% } %>
+        <% if(currUser){ %>
+          <a class="nav-link text-dark" href="/logout">Log-out</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Styling -->
+<style>
+  .navbar {
+    font-family: 'Roboto', sans-serif;
+    padding: 15px 20px;
+  }
+
+  /* Brand Icon */
+  .navbar-brand i {
+    transition: transform 0.3s;
+    font-size: 2.2rem;
+    margin-top: 1rem;
+
+  }
+
+  .navbar-brand i:hover {
+    transform: rotate(15deg);
+  }
+
+  /* Search Bar */
+  .search-bar {
+    border-radius: 30px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    transition: border 0.3s;
+    width: 100%;
+ 
+  }
+
+  .search-bar:focus {
+    border: 2px solid #ff5a5f;
+    box-shadow: 0 0 10px rgba(255, 90, 95, 0.2);
+  }
+
+  .btn-search {
+    background-color: #ff5a5f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-search:hover {
+    background-color: #ff787a;
+  }
+  .mx-auto{
+    padding-top: 1rem;
+  }
+
+  /* Styling for Links */
+  .nav-link {
+    color: #333;
+    font-weight: 500;
+  }
+
+  .nav-link:hover {
+    color: #ff5a5f;
+  }
+
+  .nav-link-btn {
+    border: 1px solid #ff5a5f;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link-btn:hover {
+    background-color: #ff5a5f;
+    color: #fff;
+  }
+
+  .left-nav{
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .left-nav a{
+    margin-right: 2.7rem;
+   
+  }
+  .right-nav{
+    margin-left: 1rem;
+  }
+  .right-nav a{
+   margin-left: 2rem;
+  }
+  
+  /* /* Responsive Styling */
+  @media (max-width: 912px) {
+    .navbar-collapse {
+      text-align: center; /* Centers all content */
+    }
+
+    .search-bar {
+      min-width: 200px; /* Smaller search bar on mobile */
+    }
+
+    .navbar-nav {
+      flex-direction: column; /* Stack everything vertically */
+      
+    }
+
+    .nav-link {
+      margin: 10px 0;
+    }
+
+    /* Second and third rows with flexbox */
+    .navbar-nav.d-flex {
+      flex-wrap: wrap; /* Allow wrapping of links */
+    }
+
+    .nav-link-btn, .nav-link {
+      flex-basis: 45%; /* Half width for Explore, Airbnb your home, Signup, and Login */
+      margin: 5px;
+      text-align: center;
+    }
+    .main{
+    font-size: 0.7rem;
+    font-weight: 200;
+  }
+  .right-nav{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+   
+  }
+  .right-nav a{
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+
+  }
+  }
+</style>

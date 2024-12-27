@@ -1,0 +1,284 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- Filters Section -->
+<div class="container-fluid py-3">
+  <div class="d-flex align-items-center">
+    <button class="arrow-btn btn btn-outline-secondary" id="scroll-left">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <div id="filters-wrapper" class="flex-grow-1">
+      <div id="filters" class="d-flex flex-nowrap">
+        <div class="filter">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p>Trending</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-bed"></i></div>
+          <p>Rooms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-umbrella-beach"></i></div>
+          <p>Beach</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-city"></i></div>
+          <p>Iconic Cities</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-tents"></i></div>
+          <p>Camping</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-brands fa-fort-awesome"></i></div>
+          <p>Castles</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-person-swimming"></i></div>
+          <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-key"></i></div>
+          <p>New</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-tractor"></i></div>
+          <p>Farms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-snowman"></i></div>
+          <p>Island</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-snowflake"></i></div>
+          <p>Arctic</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-brands fa-pagelines"></i></div>
+          <p>Tropical</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-cookie"></i></div>
+          <p>Desert</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-caravan"></i></div>
+          <p>Camper Van</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-sailboat"></i></div>
+          <p>Boats</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-tower-observation"></i></div>
+          <p>Towers</p>
+        </div>
+      </div>
+    </div>
+    <button class="arrow-btn btn btn-outline-secondary" id="scroll-right">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+  <!--<div class="gst-toggle mt-3">
+    <label for="gstSwitch" class="form-check-label">Show GST</label>
+    <input type="checkbox" id="gstSwitch" class="form-check-input">
+  </div>-->
+  
+
+  <!-- Listings Section -->
+  <div class="container mt-4">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+      <%for(let listing of allListings){%>
+          <a href="/listings/<%=listing._id %>" class="listing-link" >
+          <div class="card col listing-card" >
+              <img src="<%=listing.image.url %>"
+               class="card-img-top" 
+               alt="listing_image" 
+               style="height:17rem;">
+               
+              <div class="card-body">
+                <p class="card-text">
+                 <b> <%=listing.title %></b>
+                  <br>
+                  &#8377;<%=listing.price.toLocaleString("en-In"); %>/night
+                  <i class="tax-info"> +18% GST</i>
+                </p> 
+              </div>
+            </div>
+            <%  } %> 
+            </a>   
+  </div>
+  </div>
+</div>
+
+<!-- Toggle GST Script -->
+<script>
+ /* const gstSwitch = document.getElementById("gstSwitch");
+  gstSwitch.addEventListener("change", () => {
+    const taxInfoElements = document.getElementsByClassName("tax-info");
+    for (let info of taxInfoElements) {
+      info.style.display = gstSwitch.checked ? "inline" : "none";
+    }
+  });
+*/
+  // Scroll functionality
+  const scrollContainer = document.getElementById("filters");
+  const scrollLeftButton = document.getElementById("scroll-left");
+  const scrollRightButton = document.getElementById("scroll-right");
+
+  scrollLeftButton.addEventListener("click", () => {
+    scrollContainer.scrollBy({
+      left: -200,
+      behavior: 'smooth'
+    });
+  });
+
+  scrollRightButton.addEventListener("click", () => {
+    scrollContainer.scrollBy({
+      left: 200,
+      behavior: 'smooth'
+    });
+  });
+</script>
+
+<style>
+/* General Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Filters Section */
+#filters-wrapper {
+  position: relative;
+  overflow: hidden; /* Hide any overflow */
+}
+
+#filters {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Hide vertical overflow */
+  white-space: nowrap; /* Prevent wrapping of filter items */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for filters */
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  
+}
+
+.filter {
+  display: inline-flex; /* Align items horizontally */
+  flex-direction: column;
+  align-items: center;
+  margin: 0 15px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.filter:hover{
+  opacity: 1.5;
+  font-weight: 600;
+  transform: scale(1.05);
+}
+
+.filter i {
+  font-size: 24px;
+  color: #ff5a5f;
+}
+
+.filter p {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Arrow Buttons */
+.arrow-btn {
+  background: #fff;
+  opacity: 0.6;
+ border-radius: 4rem;
+  font-size: 2.5rem;
+  cursor: pointer;
+  outline: none;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight:lighter;
+}
+
+.arrow-btn:focus {
+  outline: none;
+}
+
+.arrow-btn i {
+  margin: 0;
+ 
+}
+
+/* GST Toggle */
+.gst-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gst-toggle label {
+  margin-right: 10px;
+}
+
+.gst-toggle input {
+  cursor: pointer;
+}
+
+/* Listings Section */
+.listing-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.listing-card:hover {
+  transform: scale(1.05);
+
+}
+
+.card-img-top {
+  height: 16rem;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  background-color: #f8f9fa;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+ 
+}
+
+.tax-info {
+  font-size: 12px;
+  color: #999;
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #filters {
+    padding: 10px; /* Adjust padding if needed */
+  }
+
+  .filter {
+    margin: 0 8px;
+  }
+
+  .listing-card {
+    margin-bottom: 1.5rem;
+  }
+}
+</style>
+
+
+

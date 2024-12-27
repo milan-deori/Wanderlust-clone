@@ -1,0 +1,65 @@
+<% if (success && success.length) { %>
+  <div class="alert alert-success alert-dismissible fade show col-10 col-md-8 col-lg-6 offset-md-2 offset-lg-3 my-4 shadow-lg" role="alert" style="border-radius: 10px; background-color: #d4edda; border-color: #c3e6cb;">
+    <strong>Success! </strong><%= success %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<% if (error && error.length) { %>
+  <div class="alert alert-danger alert-dismissible fade show col-10 col-md-8 col-lg-6 offset-md-2 offset-lg-3 my-4 shadow-lg" role="alert" style="border-radius: 10px; background-color: #f8d7da; border-color: #f5c6cb;">
+    <strong>Error! </strong><%= error %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<style>
+  .alert {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 0.7s ease-in-out forwards; /* Added fade-in animation */
+    transition: transform 0.5s ease; /* Smooth transformation on load */
+  }
+
+  .alert-success {
+    color: #155724;
+  }
+
+  .alert-danger {
+    color: #721c24;
+  }
+
+  .btn-close {
+    font-size: 1.1rem;
+  }
+
+  .shadow-lg {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Adds soft shadow effect */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .alert {
+      font-size: 1rem; /* Smaller font on mobile */
+    }
+
+    .col-10 {
+      width: 90%; /* Adjust alert width for mobile */
+    }
+
+    .btn-close {
+      font-size: 1rem;
+    }
+  }
+</style>

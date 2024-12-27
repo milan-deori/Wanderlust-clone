@@ -1,0 +1,315 @@
+<% layout("/layouts/boilerplate") %>
+
+<!-- Listing Image Section -->
+<div class="container-fluid px-0">
+  <div class="row no-gutters">
+    <div class="col-md-8 ">
+      <img src="<%= listing.image.url %>" class="hero-img img-fluid" alt="Listing Image">
+    </div>
+  </div>
+</div>
+
+<!-- Listing Details Section -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-8 ">
+      <h3 class="listing-title"><%= listing.title %></h3>
+      <p class="text-muted"> Hosted by <strong><%= listing.owner.username %></strong></p>
+      <p class="listing-description"><%= listing.description %></p>
+      <h4 class="listing-price">&#8377;<%= listing.price.toLocaleString("en-IN") %></h4>
+      <p class="listing-location"><i class="fas fa-map-marker-alt"></i> <%= listing.location %>, <%= listing.country %></p>
+    </div>
+
+    <!-- Edit/Delete buttons if owner -->
+    <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+    <div class="col-lg-8 offset-2">
+      <div class="action-buttons mt-3">
+        <a href="/listings/<%= listing._id %>/edit" class="btn edit-btn">Edit</a>
+        <form method="post" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline">
+          <button class="btn delete-btn">Delete</button>
+        </form>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<hr>
+
+<!-- Review Section -->
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <h3 class="mb-5 offset-4">Ratings and Reviews</h3>
+      <div class="review-container">
+        <% if (listing.reviews.length > 0) { %>
+          <% listing.reviews.forEach(function(review) { %>
+            <div class="review-card">
+              <div class="review mb-4 p-3">
+                <h5>User:-@<%= review.author.username %></h5>
+                <div class="rating mb-2">
+                  <p class="starability-result" data-rating="<%= review.rating %>">
+                    Rating: <%= review.rating %> Stars
+                  </p>
+                </div>
+                <p>Comment:-<%= review.comment %></p>
+                <% if (currUser && currUser._id.equals(review.author._id)) { %>
+                  <form method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                    <button class="btn btn-sm delete-btn">Delete</button>
+                  </form>
+                <% } %>
+              </div>
+            </div>
+          <% }); %>
+        <% } %>
+       
+      </div>
+           
+      <!-- Review Form -->
+      <% if (currUser) { %>
+        <form method="post" action="/listings/<%= listing._id %>/reviews" novalidate class="mt-4">
+          <div class="form-group">
+            <label for="rating">Give Rating:-</label>
+            <fieldset class="starability-slot">
+              <input type="radio" id="rate1" name="review[rating]" value="1">
+              <label for="rate1" title="1 star"></label>
+              <input type="radio" id="rate2" name="review[rating]" value="2">
+              <label for="rate2" title="2 stars"></label>
+              <input type="radio" id="rate3" name="review[rating]" value="3">
+              <label for="rate3" title="3 stars"></label>
+              <input type="radio" id="rate4" name="review[rating]" value="4">
+              <label for="rate4" title="4 stars"></label>
+              <input type="radio" id="rate5" name="review[rating]" value="5">
+              <label for="rate5" title="5 stars"></label>
+            </fieldset>
+          </div>
+
+        <!-- Textarea for user reviews -->
+<div class="form-group mt-3 ">
+  <label for="comment">Add Comment:-</label>
+  <textarea name="review[comment]" id="comment" rows="4" class="form-control review-textarea" placeholder="Write your review here..."></textarea>
+</div>
+
+          <button class="btn submit-review-btn mt-2">Submit Review</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<style>
+ /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+h3{
+  margin-left: 0;
+}
+
+/* Body, Container and General Styling */
+body, html {
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* General Styling */
+.hero-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 1.2rem;
+  margin-top: 3rem;
+  max-width: 100%;
+  margin-left: 12rem; /* Ensure no horizontal overflow */
+}
+
+.listing-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  padding-top: 0;
+  margin-left: 40%;
+}
+
+.listing-description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.listing-price {
+  color: #ff5a5f;
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.listing-location {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.action-buttons .btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 25px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+  margin-right: 10rem;
+  width: 6.6rem;
+  border: none;
+}
+
+.edit-btn:hover {
+  background-color: #007bff;
+  color: white;
+  margin-right: 10rem;
+  width: 6.6rem;
+  border: none;
+  text-decoration-line: none;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.delete-btn:hover {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.action-buttons .btn:hover {
+  opacity: 0.85;
+}
+
+/* Review Section */
+.review-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem; /* Add gap between reviews */
+}
+
+.review-card {
+  flex-basis: calc(50% - 1rem);
+  margin-bottom: 2rem;
+}
+
+.review {
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  background-color: #f9f9f9;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review h5 {
+  font-size: 1.2rem;
+}
+
+.review p {
+  font-size: 1rem;
+}
+.starability-slot{
+padding-bottom: 0;
+margin-bottom: 0;
+}
+.starability-slot label {
+  font-size: 1.2rem;
+  color: #ff5a5f;
+}
+
+.submit-review-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.submit-review-btn:hover {
+  opacity: 0.85;
+}
+/*reviews submit*/
+.review-textarea {
+  padding: 15px;
+  font-size: 1rem;
+  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-textarea:focus {
+  border-color: #007bff;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 2px 12px rgba(0, 123, 255, 0.3);
+}
+
+.review-textarea::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.form-group label {
+  font-size: 1.1rem;
+  color: #555;
+}
+/* Responsive Design */
+
+@media(max-width:912px){
+  .hero-img {
+    height: 300px;
+   margin-left: 6.5rem;
+  }
+  .listing-title {
+    font-size: 1.8rem;
+    margin-left: 7.5rem;
+  }
+
+}
+@media (max-width: 767px) {
+  .hero-img {
+    height: 250px;
+    margin-left: 0;
+  }
+
+  .listing-title {
+    font-size: 1.8rem;
+    margin-left: 0;
+  }
+
+  .listing-description, .listing-location {
+    font-size: 1rem;
+  }
+  .edit-btn {
+  
+  margin-right: 2rem;
+  margin-left: 0;
+  
+}
+  .review-container {
+    flex-direction: column;
+  }
+
+  .review-card {
+    flex-basis: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .review h5, .review p {
+    font-size: 0.9rem;
+  }
+}
+
+
+</style>

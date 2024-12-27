@@ -1,0 +1,56 @@
+/*main part*/
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-optical-sizing: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 120vh;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  flex: 1;
+}
+.fa-regular {
+  color: brown;
+  font-size: 2rem;
+}
+
+/* Cards */
+
+.listing-card {
+  border: none !important;
+  margin-bottom: 2rem;
+}
+.card-img-top {
+  border-radius: 1rem;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Search button */
+.me-2 {
+  border-radius: 1rem !important;
+  padding: 0.5rem 3rem !important;
+  font-size: 0.8rem !important;
+}
+
+/* Scrollbar container */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.1rem;
+}
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+/* Scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+  

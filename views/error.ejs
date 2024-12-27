@@ -1,0 +1,75 @@
+<%layout("/layouts/boilerplate")%>
+
+<style>
+  body {
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .error-container {
+    background-color: #fff; /* White background for alert */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1); /* Slight shadow */
+    max-width: 600px;
+    margin: auto;
+    margin-top: 100px;
+  }
+
+  .alert {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .alert-danger {
+    background-color: #ffebee; /* Light red background */
+    color: #d32f2f; /* Darker red text */
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #d32f2f;
+  }
+
+  .alert-icon {
+    font-size: 30px;
+    margin-right: 15px;
+    color: #d32f2f;
+  }
+
+  .alert-message {
+    flex: 1;
+    margin: 0;
+  }
+
+  .back-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .back-link a {
+    color: #d32f2f;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .back-link a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="row">
+  <div class="error-container">
+    <div class="alert alert-danger">
+      <div class="alert-icon">
+        &#9888; <!-- Warning sign icon (can replace with an icon font or image if needed) -->
+      </div>
+      <p class="alert-message"><%= message %></p>
+    </div>
+
+    <div class="back-link">
+      <a href="/listings">Go Back to Home</a>
+    </div>
+  </div>
+</div>
