@@ -61,7 +61,7 @@ main()
 
 //user active dates
 const store=MongoStore.create({
-    mongoUrl:'mongodb+srv://milandeori803:Onb15AlajnaCVpYV@cluster0.seb2r.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+    mongoUrl:'process.env.ATLASTDB_UR',
     crypto:{
         secret:"SuperSecretCode",
     },
